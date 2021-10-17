@@ -1,19 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-class Program
+namespace Treino03
 {
-    static void Main(string[] args)
+    class Program
     {
-        int [] sum = new int [4];
-        Console.WriteLine("Enter 4 numbers to calculate the average\n If you don´t mind of course ;D");
-        for( int i = 0; i < sum.Length; i++)
+        static void Main()
         {
-            sum[i] = Convert.ToInt32(Console.ReadLine());
+            const int inputCount = 4;
+            var inputValues = new List<int>(inputCount);
+            Console.WriteLine($"Enter {inputCount} numbers to calculate the average");
+            Console.WriteLine("If you don´t mind of course ;D");
+            for(var i = 0; i < inputCount; i++)
+            {
+                var userInput = Console.ReadLine();
+                if (int.TryParse(userInput, out var intIHope))
+                {
+                    inputValues.Add(intIHope);
+                }
+                else
+                {
+                    Console.WriteLine("I told you to enter numbers. I wanted integers.");
+                    Console.WriteLine("Run the program again with integers!");
+                }
+            }
+            Console.WriteLine(
+                $"The average of {string.Join(", ", inputValues)} is {inputValues.Sum() / inputCount}");
         }
-        int result = sum[0] + sum[1] + sum[2] + sum[3];
-        result = result / 4;
-
-        Console.WriteLine("The average of {0}, {1}, {2}, {3} is: {4}", sum[0], sum[1]
-        ,sum[2], sum[3], result);
     }
 }
